@@ -124,7 +124,7 @@ app.get('/data_api/:id', (req, res)=> {
 app.get('/kwaba_user/:u_id', (req,res)=> {  
 
   con.query(
-    `SELECT * FROM users ORDER BY id `,(err,result)=>{
+    `SELECT * FROM users WHERE id = ${req.params.u_id} `,(err,result)=>{
           if(err){
             res.send({err: err})
           }
