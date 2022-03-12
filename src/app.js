@@ -130,7 +130,7 @@ app.get('/kwaba_user/:u_id', (req,res)=> {
           }
       
         if(result) {
-          res.send({result:[req.params.u_id]});
+          res.send(result[req.params.u_id]);
         }
     }
   )
