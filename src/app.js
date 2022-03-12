@@ -124,7 +124,7 @@ app.get('/data_api/:id', (req, res)=> {
 app.get('/kwaba_user/:u_id', (req,res)=> {  
 
   con.query(
-    `SELECT * FROM users ORDER BY id`,(err,result)=>{
+    `SELECT * FROM users ORDER BY id `,(err,result)=>{
           if(err){
             res.send({err: err})
           }
@@ -136,19 +136,7 @@ app.get('/kwaba_user/:u_id', (req,res)=> {
   )
 })
 
-app.get('/kwaba_user/', (req,res)=> {  
-  con.query(
-    "SELECT * FROM users ORDER BY id ",(err,result)=>{
-          if(err){
-            res.send({err: err})
-          }
-      
-        if(result) {
-          res.send({result: result});
-        }
-    }
-  )
-})
+
 
 app.post('/register_user', (req,res)=>{
   const fullname = req.body.fullName
