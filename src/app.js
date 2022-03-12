@@ -148,3 +148,45 @@ app.get('/kwaba_user/', (req,res)=> {
     }
   )
 })
+
+app.post('/register_user', (req,res)=>{
+  const fullname = req.body.fullName
+  const username = req.body.userName
+  const email = req.body.emailAdrr
+  const password = req.body.passWord
+  const rand_u = req.body.randUser
+    
+  // res.send({reg_confirmed: 'Registration Successfully Completed'})
+
+   con.query(
+     "INSERT INTO users (fullname,username,email,password,rand) VALUE(?,?,?,?,?)",[fullname,username,email,password,rand_u],
+     (err,result)=>{
+         if(result){
+             res.send({reg_confirmed: 'Registration Successfully Completed'})
+         }else{
+          res.send({reg_exist: 'Account Already Exist!!!'})
+         }
+     }
+   )
+})
+
+app.post('/login_user', (req,res)=> {
+      const userEmail = req.body.email_u
+      const userPass =  req.body.pass_u
+
+    con.query(
+      "SELECT * FROM users WHERE email=? AND password=?",
+       [userEmail,userPass],(err,result)=>{
+            if(err){
+              res.send({err: err})
+            }
+         
+           if(result.length > 0) {
+             res.send({result: result });
+           } else {
+             res.send({message: "Wrong username / password combination."})
+           }
+        
+      }
+    )
+})
