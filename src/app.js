@@ -120,3 +120,17 @@ app.get('/data_api/:id', (req, res)=> {
      ]
         res.send(products[req.params.id])
 })
+
+app.get('/kwaba_user/:u_id', (req,res)=> {  
+  con.query(
+    "SELECT * FROM users ORDER BY id ",(err,result)=>{
+          if(err){
+            res.send({err: err})
+          }
+      
+        if(result) {
+          res.send(result[req.params.u_id]);
+        }
+    }
+  )
+})
