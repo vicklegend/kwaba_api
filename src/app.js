@@ -122,15 +122,15 @@ app.get('/data_api/:id', (req, res)=> {
 })
 
 app.get('/kwaba_user/:u_id', (req,res)=> {  
-  const user_info = req.params.u_id;
+
   con.query(
-    `SELECT * FROM users WHERE id=${user_info}`,(err,result)=>{
+    `SELECT * FROM users ORDER BY id`,(err,result)=>{
           if(err){
             res.send({err: err})
           }
       
         if(result) {
-          res.send(result[req.params.u_id]);
+          res.send({result:[req.params.u_id]});
         }
     }
   )
